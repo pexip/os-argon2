@@ -1,6 +1,7 @@
 Source: argon2
 Priority: optional
-Maintainer: Luca Bruno <lucab@debian.org>
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Luca Bruno <lucab@debian.org>
 Build-Depends: debhelper (>= 9),
                dh-exec (>=0.3)
 Standards-Version: 4.1.4
@@ -8,6 +9,7 @@ Section: libs
 Homepage: https://github.com/P-H-C/phc-winner-argon2
 Vcs-Browser: https://salsa.debian.org/debian/argon2
 Vcs-Git: https://salsa.debian.org/debian/argon2.git
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ buster
 
 Package: libargon2-dev
 Section: libdevel
