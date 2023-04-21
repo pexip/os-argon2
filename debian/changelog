@@ -1,3 +1,28 @@
+argon2 (0~20171227-0.3+deb12u1) bookworm; urgency=medium
+
+  * Non-maintainer upload.
+
+  [ Bastian Germann ]
+  * Add Breaks on cryptsetup-initramfs (see #1032235)
+
+  [ Guilhem Moulin ]
+  * d/gbp.conf: Set 'debian-branch = debian/bookworm'.
+  * d/rules: Restore threading support to libargon2-1-udeb (closes: #1034696).
+    This is beneficial for cryptsetup-udeb, see #1028250.  Removing threading
+    support in libargon2-1-udeb was done for historical reasons no longer
+    relevant since Debian Bookworm.  This also restores threading support to
+    argon2 which was inadvertently dropped in 0~20171227-0.1 (closes:
+    #1032234).
+
+ -- Guilhem Moulin <guilhem@debian.org>  Fri, 21 Apr 2023 21:29:33 +0200
+
+argon2 (0~20171227-0.3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Fix FTBFS on kfreebsd architectures (Closes: #1004304)
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 13 Feb 2022 10:41:34 +0100
+
 argon2 (0~20171227-0.2) unstable; urgency=medium
 
   * Non-maintainer upload.
