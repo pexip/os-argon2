@@ -1,0 +1,2 @@
+# Not needed, we run Debhelper compat level 13
+override_dh_auto_test-does-not-check-DEB_BUILD_OPTIONS

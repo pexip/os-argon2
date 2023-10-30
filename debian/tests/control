@@ -1,0 +1,4 @@
+Tests: hash-a-secret-and-check-the-result
+Depends: python3-argon2,
+         @
+Restrictions: isolation-container

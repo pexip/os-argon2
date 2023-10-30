@@ -1,0 +1,15 @@
+Description: Fix shared library build on hurd-i386
+Forwarded: not-needed
+Author: Samuel Thibault <sthibault@debian.org>
+Last-Update: 2023-10-06
+--- a/Makefile
++++ b/Makefile
+@@ -69,7 +69,7 @@ LIB_NAME = argon2
+ PC_NAME = lib$(LIB_NAME).pc
+ PC_SRC = $(PC_NAME).in
+ 
+-ifeq ($(KERNEL_NAME), Linux)
++ifeq ($(KERNEL_NAME), $(filter $(KERNEL_NAME),Linux GNU))
+ 	LIB_EXT := so.$(ABI_VERSION)
+ 	LIB_CFLAGS := -shared -fPIC -fvisibility=hidden -DA2_VISCTL=1
+ 	SO_LDFLAGS := -Wl,-soname,lib$(LIB_NAME).$(LIB_EXT)

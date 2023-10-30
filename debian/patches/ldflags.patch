@@ -1,0 +1,16 @@
+Description: testcase: Build with LDFLAGS
+Forwarded: https://github.com/P-H-C/phc-winner-argon2/issues/363
+Author: Bastian Germann <bage@debian.org>
+Author: Sven Geuer <debmaint@g-e-u-e-r.de>
+Last-Update: 2023-10-27
+--- a/Makefile
++++ b/Makefile
+@@ -215,7 +215,7 @@ dist:
+ 
+ .PHONY: test
+ test:           $(SRC) src/test.c
+-		$(CC) $(CFLAGS)  -Wextra -Wno-type-limits $^ -o testcase
++		$(CC) $(CFLAGS) $(LDFLAGS) -Wextra -Wno-type-limits $^ -o testcase
+ 		@sh kats/test.sh
+ 		./testcase
+ 

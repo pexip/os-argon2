@@ -4,30 +4,29 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-DPKG_EXPORT_BUILDFLAGS = 1
-include /usr/share/dpkg/architecture.mk
-include /usr/share/dpkg/buildflags.mk
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
 include /usr/share/dpkg/default.mk
 
+# Upstream does not honor CPPFLAGS, hence we add it to CFLAGS here.
+export CFLAGS+=$(CPPFLAGS)
+# Optimized source code is only available for the x86_64 architecture.
+export OPTTARGET=$(if $(findstring $(DEB_HOST_GNU_CPU),x86_64),x86-64,none)
 export PKG=libargon2
-export OPTTARGET=$(DEB_TARGET_GNU_CPU)
 export SONAME=$(PKG).so.$(SOVER)
 export SOPKG=$(PKG)-$(SOVER)
 export SOVER=1
 export DEBPREFIX=0~
-export UPSTREAMVER=$(subst $(DEBPREFIX),,$(DEB_VERSION_UPSTREAM))
+export DEBSUFFIX=+dfsg
+export ARGON2_VERSION=$(subst $(DEBSUFFIX),,$(subst $(DEBPREFIX),,$(DEB_VERSION_UPSTREAM)))
 
 %:
 	dh $@
 
-override_dh_install:
-	dh_install
-	sed -i '/^## /d' debian/${PKG}-dev/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/libargon2.pc
-	sed -i s/@HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/ debian/${PKG}-dev/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/libargon2.pc
-	sed -i s/@UPSTREAM_VER@/$(UPSTREAMVER)/ debian/${PKG}-dev/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/libargon2.pc
-
 override_dh_auto_test:
 	-$(MAKE) -j1 test
+
+override_dh_auto_install:
 
 override_dh_makeshlibs:
 	dh_makeshlibs -V --add-udeb="libargon2-1-udeb"
