@@ -62,6 +62,7 @@ Package: libargon2-1
 Architecture: any
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Breaks: cryptsetup-initramfs (<<2:2.6.1-2)
 Multi-Arch: same
 Description: memory-hard hashing function - runtime library
  Argon2 is a password-hashing function that can be used to hash passwords
