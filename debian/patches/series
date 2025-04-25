@@ -1,2 +1,4 @@
-hurd
-kfreebsd
+hurd.patch
+kfreebsd.patch
+relative-paths.patch
+ldflags.patch

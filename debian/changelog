@@ -1,3 +1,91 @@
+argon2 (0~20190702+dfsg-4) unstable; urgency=medium
+
+  * New maintainer and add myself as uploader (Closes: #1032462).
+    - Update d/control.
+  * Switch to DH compat format and raise level
+    - Replace Build-Depends debhelper (>= 9) by debhelper-compat (= 13)
+      in d/control.
+    - Remove file d/compat.
+  * d/rules: Disable dh_auto_install as dh_install picks files from where they
+    have been built to anyway. Also prevents dh_missing from erroring out what
+    happens with debhelper level 13.
+  * Introduce autopkgtest per d/tests/*.
+    - A secret is hashed via the command line tool and via a python script
+      using the library. The results are compared to a pre-defined hash.
+  * d/patches/*
+    - Provide all patches with DEP-3 compliant headers.
+    - Append .patch to all patch file names.
+  * Drop the out-dated maintainer provided manual page, upstream's manual page
+    has been introduced quite a while ago.
+  * d/u/metadata: Add further information about the upstream project.
+  * d/watch: Update to version 4.
+  * d/libargon2-1.symbols: Add Build-Depends-Package field.
+  * d/rules: Enable all hardening options available for ELF binaries.
+  * d/copyright: Add missing email addresses, add missing debian/* authors.
+  * d/control
+    - Update Vcs-Browser and Vcs-Git.
+    - Introduce Rules-Requires-Root with value 'no'.
+    - Bump Standards-Version to 4.6.2.
+  * Introduce d/p/relative-paths.patch to make sure libargon2.pc is generated
+    with the correct content.
+  * Drop unused file d/libargon2.pc.
+  * Make use of the optimized source code available for the x86_64 architecture
+    when (cross-)building for this architecture.
+  * d/rules: Drop not needed exports and includes, checked by diffoscope.
+  * d/s/linitian-overrides: Override lintian's
+    override_dh_auto_test-does-not-check-DEB_BUILD_OPTIONS, it is not
+    applicable due to Debhelper compat level 13.
+  * Introduce d/salsa-ci.yml.
+
+ -- Sven Geuer <debmaint@g-e-u-e-r.de>  Mon, 30 Oct 2023 10:09:28 +0100
+
+argon2 (0~20190702+dfsg-3) unstable; urgency=medium
+
+  * QA upload
+  * d/rules: Restore threading support to libargon2-1-udeb (closes: #1034696).
+    This is beneficial for cryptsetup-udeb, see #1028250.  Removing threading
+    support in libargon2-1-udeb was done for historical reasons no longer
+    relevant since Debian Bookworm.
+
+ -- Guilhem Moulin <guilhem@debian.org>  Fri, 21 Apr 2023 19:48:56 +0200
+
+argon2 (0~20190702+dfsg-2) unstable; urgency=medium
+
+  * QA upload
+  * Add Breaks on cryptsetup-initramfs (see #1032235)
+
+ -- Bastian Germann <bage@debian.org>  Thu, 16 Mar 2023 00:16:03 +0100
+
+argon2 (0~20190702+dfsg-1) experimental; urgency=medium
+
+  * QA upload
+  * Orphan the package (see #1032462)
+  * Exclude non-source pdf and Windows build files
+  * Pay attention to missing build flags
+
+ -- Bastian Germann <bage@debian.org>  Mon, 13 Mar 2023 12:00:19 +0100
+
+argon2 (0~20190702-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload
+  * Only build udeb without threads (Closes: #1014110)
+
+  [ Ondřej Nový ]
+  * d/copyright: Use https protocol in Format field (Closes: #1032102)
+  * New upstream version 0~20190702 (Closes: #1012682)
+
+  [ Laurent Bigonville ]
+  * debian/patches/: Refresh the patches
+  * Drop transitional libargon2-0 package (Closes: #902858)
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Database.
+  * Set upstream metadata fields: Bug-Submit.
+  * Remove constraints unnecessary since buster (oldstable):
+    + Build-Depends: Drop versioned constraint on dh-exec.
+
+ -- Bastian Germann <bage@debian.org>  Tue, 28 Feb 2023 11:58:57 +0100
+
 argon2 (0~20171227-0.3+deb12u1+pexip24u3) pexip-bookworm; urgency=medium
 
   * New versioning scheme

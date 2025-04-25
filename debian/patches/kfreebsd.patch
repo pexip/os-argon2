@@ -1,9 +1,13 @@
+Description: Fix FTBFS on kfreebsd architectures
+Forwarded: not-needed
+Author: Laurent Bigonville <bigon@debian.org>
+Last-Update: 2023-10-06
 --- a/Makefile
 +++ b/Makefile
-@@ -58,7 +58,7 @@ BUILD_PATH := $(shell pwd)
- KERNEL_NAME := $(shell uname -s)
+@@ -69,7 +69,7 @@ LIB_NAME = argon2
+ PC_NAME = lib$(LIB_NAME).pc
+ PC_SRC = $(PC_NAME).in
  
- LIB_NAME=argon2
 -ifeq ($(KERNEL_NAME), $(filter $(KERNEL_NAME),Linux GNU))
 +ifeq ($(KERNEL_NAME), $(filter $(KERNEL_NAME),Linux GNU GNU/kFreeBSD))
  	LIB_EXT := so.$(ABI_VERSION)

@@ -1,0 +1,25 @@
+Description: Set correct relative paths for all Debian architectures
+ KERNEL_NAME: Handle values 'GNU' and 'GNU/kFreeBSD' equally to 'Linux'.
+ LIBRARY_REL: Honor DEB_HOST_MULTIARCH.
+ This makes sure the content of argon2.pc corresponds to reality.
+Forwarded: not-needed
+Author: Sven Geuer <debmaint@g-e-u-e-r.de>
+Last-Update: 2023-10-07
+--- a/Makefile
++++ b/Makefile
+@@ -138,12 +138,12 @@
+ LIBRARY_REL ?= lib
+ PKGCONFIG_REL ?= libdata
+ 
+-else ifeq ($(KERNEL_NAME)-$(MACHINE_NAME), Linux-x86_64)
++else ifeq ($(KERNEL_NAME), $(filter $(KERNEL_NAME),Linux GNU GNU/kFreeBSD))
+ 
+-# default for Debian/Ubuntu x86_64
++# default for Debian/Ubuntu
+ BINARY_REL ?= bin
+ INCLUDE_REL ?= include
+-LIBRARY_REL ?= lib/x86_64-linux-gnu
++LIBRARY_REL ?= lib/$(DEB_HOST_MULTIARCH)
+ PKGCONFIG_REL ?= $(LIBRARY_REL)
+ 
+ else
